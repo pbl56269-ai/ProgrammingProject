@@ -16,18 +16,21 @@ public class ArrayBasedFaculty {
         lastestJoinedFacultyIndex = 0;
     }
 
-    public void addFaculty(Faculty newFaculty)
+    public void push(Faculty newFaculty) throws StackFullException   
     {
 
     }
     
-    public Faculty peekLastestJoinedFaculty()
+    public Faculty peek() throws StackEmptyException
     {
-
+        return facultyList[lastestJoinedFacultyIndex];
     }
 
-    public Faculty removeLastestJoinedFaculty()
+    public Faculty pop() throws StackEmptyException
     {
-        
+        // Remove and return the latest joined faculty
+        return facultyList[lastestJoinedFacultyIndex];
     }
+
+
 }
