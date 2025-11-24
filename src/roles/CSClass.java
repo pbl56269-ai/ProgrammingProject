@@ -1,50 +1,66 @@
 package roles;
 
 public class CSClass {
-    private String className;
-    private String classCode;
+    private String classThreeLetterAbbreviation;
+    private int classDigitNumber;
+    private String classSectionNumber;
+
     private Faculty assignedFaculty;
     private Student[] enrolledStudents;
-    
-    private int startTime;
-    private int endTime;
 
-    private int[][] classSchedule; 
-
-    // 0 = Monday, 1 = Tuesday ..., 5 = Saturday
-    // 8    *                             *
-    // 9    *                             *
-    // 10   *                             *
+    private Student[] waitlistedStudents;
+    private int numberOfWaitlistedStudents;
     
+    private int startTime; 
+    private int endTime; 
+
+ 
 
     public CSClass() {
-        className = "";
-        classCode = "";
+        classThreeLetterAbbreviation = "";
+        classDigitNumber = 0;
+        classSectionNumber = "";
         assignedFaculty = null;
-        enrolledStudents = new Student[0];
+
+        // Maximum 10 students
+        enrolledStudents = new Student[10];
+        // Maximum 3 wait list
+        waitlistedStudents = new Student[3];
+        
+        numberOfWaitlistedStudents = 0;
+
         startTime = 0;
         endTime = 0;
-        classSchedule = new int[0][0];
     }
 
-    public void setClassName(String newClassName)
+    public void setClassThreeLetterAbbreviation(String newClassThreeLetterAbbreviation)
     {
-        className = newClassName;
+        classThreeLetterAbbreviation = newClassThreeLetterAbbreviation;
     }
 
-    public String getClassName()
+    public String getClassThreeLetterAbbreviation()
     {
-        return className;
+        return classThreeLetterAbbreviation;
     }
 
-    public void setClassCode(String newClassCode)
+    public void setClassCode(int newClassDigitNumber)
     {
-        classCode = newClassCode;
+        classDigitNumber = newClassDigitNumber;
     }
 
-    public String getClassCode()
+    public int getClassCode()
     {
-        return classCode;
+        return classDigitNumber;
+    }
+
+    public void setClassSectionNumber(String newClassSectionNumber)
+    {
+        classSectionNumber = newClassSectionNumber;
+    }
+
+    public String getClassSectionNumber()
+    {
+        return classSectionNumber;
     }
 
     public void setFaculty(Faculty newFaculty)
@@ -56,4 +72,75 @@ public class CSClass {
     {
         return assignedFaculty;
     }
+
+    public void setStartTime(int newStartTime){
+        startTime = newStartTime;
+    }
+
+    public int getStartTime(){
+        return startTime;
+    }
+
+    public void setEndTime(int newEndTime){
+        endTime = newEndTime;
+    }
+
+    public int getEndTime(){
+        return endTime;
+    }
+
+    public void setWaitlistedStudents(Student[] newWaitlistedStudents){
+        waitlistedStudents = newWaitlistedStudents;
+    }
+
+    public Student[] getWaitlistedStudents(){
+        return waitlistedStudents;
+    }
+
+    public void setNumberOfWaitlistedStudents(int newNumber){
+        numberOfWaitlistedStudents = newNumber;
+    }
+
+    public int getNumberOfWaitlistedStudents(){
+        return numberOfWaitlistedStudents;
+    }
+
+    public void addStudentToClass(Student s){
+        Student[] temp = new Student[enrolledStudents.length + 1];
+        for (int i = 0; i < enrolledStudents.length; i++){
+            temp[i] = enrolledStudents[i];
+        }
+        temp[enrolledStudents.length] = s;
+        enrolledStudents = temp;
+    }
+
+    public Student[] getEnrolledStudents(){
+        return enrolledStudents;
+    }
+    
+
+    public void addToWaitlist(Student s){
+        if(numberOfWaitlistedStudents < waitlistedStudents.length){
+            waitlistedStudents[numberOfWaitlistedStudents] = s;
+            numberOfWaitlistedStudents++;
+        }
+    }
+
+    // TODO: Not finshed 
+    public void printEnrollment(){
+        System.out.println("\nClass: " + classThreeLetterAbbreviation + " (" + classDigitNumber + ")");
+        System.out.println("Assigned Faculty: " +
+        (assignedFaculty != null ? assignedFaculty.getFacultyName() : "None"));
+
+        if (enrolledStudents.length == 0){
+            System.out.println("No enrolled students.");
+            return;
+        }
+        
+        System.out.println("Enrolled Students:");
+        for (int i = 0; i < enrolledStudents.length; i++){
+            System.out.println(" - " + enrolledStudents[i].checkUsername("dummy")); // dummy ? XD
+        }
+    }
+
 }

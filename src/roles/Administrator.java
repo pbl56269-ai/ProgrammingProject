@@ -3,12 +3,16 @@ package roles;
 public class Administrator implements RoleInterface {
     private String adminUsername;
     private String adminPassword;
-    CSClass[] currentClasses;
+    StackArrayBasedFaculty facultyStackManager; 
+    NodeBinaryTreeBasedStudent studentBinaryTreeManager;
+    ArrayBasedCSClasses classesManager;
 
     public Administrator() {
         adminUsername = "Admin";
         adminPassword = "BigAdmin";
-        currentClasses = new CSClass[0];
+        facultyStackManager = new StackArrayBasedFaculty();
+        studentBinaryTreeManager = new NodeBinaryTreeBasedStudent();
+        classesManager = new ArrayBasedCSClasses(50);
     }
 
     public boolean checkUsername(String username) {
@@ -19,17 +23,38 @@ public class Administrator implements RoleInterface {
         return adminPassword.equals(password);
     }
 
-    public int checkErollmentNumber() {
-        return 0;
-    }
-
-    // print out the current classes
-    public void LookAtClasses()
+    public boolean checkFacultyUsernames(String enteredUsername)
     {
+        return facultyStackManager.checkFacultyUsernames(enteredUsername);
+    }
+
+    public boolean checkFacultyPasswords(String enteredPassword)
+    {
+        return facultyStackManager.checkFacultyPasswords(enteredPassword);
+    }
+
+    public boolean checkStudentUsernames(String enteredUsername)
+    {
+        return facultyStackManager.checkFacultyUsernames(enteredUsername);
+    }
+
+    public boolean checkStudentPasswords(String enteredPassword)
+    {
+        return facultyStackManager.checkFacultyPasswords(enteredPassword);
+    }
+
+    public void checkStudentErollment() {
+        System.out.println("Current enrolled students: " + studentBinaryTreeManager.currentEnrolledstudent());
+        studentBinaryTreeManager.printOutEnrolledStudents(); // TODO: in binary tree
 
     }
 
-    public void addClass()
+    public void checkClasses()
+    {
+        classesManager.printAllClasses();
+    }
+
+    public void addClass(CSClass newClass)
     {
 
     }
@@ -39,32 +64,32 @@ public class Administrator implements RoleInterface {
 
     }
 
-    public void AssignFaculty()
+    public void assignFaculty()
     {
 
     }
 
-    public void HireFaculty()
+    public void hireFaculty()
     {
 
     }
 
-    public void RemoveFaculty()
+    public void removeFaculty()
     {
 
     }
 
-    public void HirePartTimeStaff()
+    public void hirePartTimeStaff()
     {
 
     }
 
-    public void RemovePartTimeStaff()
+    public void removePartTimeStaff()
     {
 
     }
 
-    public void Logout()
+    public void logout()
     {
 
     }
