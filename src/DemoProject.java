@@ -201,12 +201,51 @@ public class DemoProject {
                 System.out.println("What is your class section number: ");
                 String newclassThreeLetterAbbreviation = keyboard.nextLine();
 
-                CSClass newClass = new CSClass();
+                System.out.println("What is your class size: ");
+                int newClassSize = keyboard.nextInt();
 
+                System.out.println("What is your class wait list size: ");
+                int newWaitListSize = keyboard.nextInt();
+
+                System.out.println("Class time are limited between 8 to 22, please use 24H system");
+                System.out.println("What is your class start time: ");
+                int newStartTime = keyboard.nextInt();
+
+                System.out.println("What is your class end time: ");
+                int newEndtime = keyboard.nextInt();
+                keyboard.nextLine();
+
+
+                CSClass newClass = new CSClass(newClassThreeLetterAbbreviation, newClassDigitNumber, newclassThreeLetterAbbreviation, newClassSize, newWaitListSize);
+                newClass.setStartTime(newStartTime);
+                newClass.setEndTime(newEndtime);
+                
+                schoolAdmin.addClass(newClass);
                 break;
 
             case 4:
-                
+                System.out.println("What is the class three letter abbreviation: ");
+                String newClassThreeLetterAbbreviation = keyboard.nextLine();
+
+                System.out.println("What is the class digit numbers: ");
+                int newClassDigitNumber = keyboard.nextInt();
+                keyboard.nextLine();
+
+                System.out.println("What is the class section number: ");
+                String newclassThreeLetterAbbreviation = keyboard.nextLine();
+
+                System.out.println("Class time are limited between 8 to 22, please use 24H system");
+                System.out.println("What is the class start time: ");
+                int newStartTime = keyboard.nextInt();
+
+                System.out.println("What is the class end time: ");
+                int newEndtime = keyboard.nextInt();
+                keyboard.nextLine();
+
+                CSClass remove = new CSClass(newClassThreeLetterAbbreviation, newClassDigitNumber, newclassThreeLetterAbbreviation, newClassSize, newWaitListSize);
+
+
+                schoolAdmin.removeClass();
                 break;
 
             case 5:

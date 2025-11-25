@@ -16,7 +16,8 @@ public class CSClass {
 
  
 
-    public CSClass() {
+    public CSClass() 
+    {
         classThreeLetterAbbreviation = "";
         classDigitNumber = 0;
         classSectionNumber = "";
@@ -31,6 +32,17 @@ public class CSClass {
 
         startTime = 0;
         endTime = 0;
+    }
+
+    public CSClass(String newClassThreeLetterAbbreviation, int newClassDigitNumber, String newClassSectionNumber, int newClassSize, int newWaitListSize) 
+    {
+        classThreeLetterAbbreviation = newClassThreeLetterAbbreviation;
+        classDigitNumber = newClassDigitNumber;
+        classSectionNumber = newClassSectionNumber;
+        assignedFaculty = null;
+
+        enrolledStudents = new Student[newClassSize];
+        waitlistedStudents = new Student[newWaitListSize];
     }
 
     public void setClassThreeLetterAbbreviation(String newClassThreeLetterAbbreviation)

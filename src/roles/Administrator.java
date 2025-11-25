@@ -56,12 +56,13 @@ public class Administrator implements RoleInterface {
 
     public void addClass(CSClass newClass)
     {
-
+        studentBinaryTreeManager.addClass(newClass);
     }
 
-    public void removeClass()
+    public void removeClass(CSClass newClass)
     {
-
+        studentBinaryTreeManager.removeClass()
+        // Let all the faculty and student know that class has been dropped
     }
 
     public void assignFaculty()
