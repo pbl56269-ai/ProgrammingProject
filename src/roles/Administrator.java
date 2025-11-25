@@ -35,12 +35,12 @@ public class Administrator implements RoleInterface {
 
     public boolean checkStudentUsernames(String enteredUsername)
     {
-        return facultyStackManager.checkFacultyUsernames(enteredUsername);
+        return studentBinaryTreeManager.checkFacultyUsernames(enteredUsername);
     }
 
     public boolean checkStudentPasswords(String enteredPassword)
     {
-        return facultyStackManager.checkFacultyPasswords(enteredPassword);
+        return studentBinaryTreeManager.checkFacultyPasswords(enteredPassword);
     }
 
     public void checkStudentErollment() {
@@ -62,8 +62,14 @@ public class Administrator implements RoleInterface {
     public void removeClass(CSClass newClass)
     {
         studentBinaryTreeManager.removeClass()
-        // Let all the faculty and student know that class has been dropped
+        // TODO: Let all the faculty and student know that class has been dropped
     }
+
+    public void printOutFacultyList()
+    {
+        facultyStackManager.printOutFacultyList();
+    }
+
 
     public void assignFaculty()
     {
@@ -90,8 +96,8 @@ public class Administrator implements RoleInterface {
 
     }
 
-    public void logout()
+    public boolean checkFacultyID()
     {
-
+        return facultyStackManager.checkFacultyID();
     }
 }

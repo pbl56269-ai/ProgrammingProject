@@ -1,43 +1,50 @@
 package roles;
 
-public class Student implements RoleInterface {
-    private String username;
-    private String password;
-    private String[] studentArray;
+public class Student {
+   private String studentID;
+   private String name;
+   private String birthdate;
+   private String username;
+   private String password;
 
-    private int[][] classSchedule; 
-
-    // 0 = Monday, 1 = Tuesday ..., 5 = Saturday
-    // 8    *                             *
-    // 9    *                             *
-    // 10   *                             *
-    
-
-    public Student() {
-        super();
-        username = "";
-        password = "";
-        classSchedule = new int[0][0];
-
-    }
-
-    public Student(String username, String password) {
-        super();
+   public Student(Sring studentID, String name, String birthdate, String username, String password) {
+        this.studentID = studentID;
+        this.name = name;
+        this.birthdate = birthdate;
         this.username = username;
         this.password = password;
-    }
-    
-    public boolean enterUsername(String username) {
-        boolean isinSystem = false;
-        return isinSystem;
-    }
+   }
 
-    public boolean checkUsername(String username) {
-        return username.equals(username);
-    }
+   public String getStudentID() {
+        return studentID;
+   }
 
-    public boolean checkPassword(String password) {
-        return password.equals(password);
+   public String getName() {
+        return name;
+   }
+
+   public String getBirthdate() {
+        return birthdate;
+   }
+
+   public String getUsernmame() {
+        return username;
+   }
+
+   public String getPassword() {
+        return password;
+   } 
+
+   @Override
+   public boolean equals(Object otherObject) {
+        boolean areTheyEqual = false;
+        if (otherObject != null && otherObject instanceof Student) {
+            Student otherStudent = (Student) otherObject;
+            if (this.name.equals(otherStudent.name) && this.birthDate.equals(otherStudent.birthDate)) {
+                areTheyEqual = true;
+            }
+        }
+        return areTheyEqual;
     }
 
 }

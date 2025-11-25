@@ -32,7 +32,7 @@ public class StackArrayBasedFaculty {
         if(lastestJoinedFacultyIndex == 0){
             throw new DataStructureEmptyException();
         }
-        return facultyList[lastestJoinedFacultyIndex - 1];
+        return facultyList[lastestJoinedFacultyIndex];
     }
 
     public Faculty pop() throws DataStructureEmptyException
@@ -71,6 +71,41 @@ public class StackArrayBasedFaculty {
                 return true;
             }
         }
+        return false;
+    }
+
+    public void printOutFacultyList()
+    {
+        for(int i = 0; i < lastestJoinedFacultyIndex; i++){
+            System.out.println("Faculty name: " + facultyList[i].getFacultyName());
+            System.out.println("Faculty ID: " + facultyList[i].getID());
+            System.out.println("Faculty credit hours: " + facultyList[i].getCreditHours());
+        }
+        return false;
+    }
+
+    public Faculty findFaculty(int facultyID)
+    {
+
+        for(int i = 0; i < lastestJoinedFacultyIndex; i++){
+            int currentFacultyID = facultyList[i].getID ;
+            if(currentFacultyID == facultyID){
+                return facultyList[i];
+            }
+        }
+
+        return null;
+    }
+
+    public boolean checkFacultyID(int ID)
+    {
+         for(int i = 0; i < lastestJoinedFacultyIndex; i++){
+            int currentFacultyID = facultyList[i].getID ;
+            if(currentFacultyID == facultyID){
+                return true;
+            }
+        }
+
         return false;
     }
 }

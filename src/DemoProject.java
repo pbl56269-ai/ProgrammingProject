@@ -2,12 +2,14 @@ import java.util.Scanner;
 
 import roles.Administrator;
 import roles.Faculty;
+import roles.Student;
 import roles.CSClass;
 
 public class DemoProject {
 
     static Administrator schoolAdmin = null;
     static String userState = "System-Log-In";
+    FacultyGenerator facultyGenerator = new facultyGenerator();
 
     public static void main(String[] args) throws Exception {
         schoolAdmin = new Administrator();
@@ -73,12 +75,21 @@ public class DemoProject {
                         
                         
                     }
+                    else if (option == 3)
+                    {
+                        userState = "System-Log-In";
+                        System.out.println("logging out...");
+                    }
+                    else
+                    {
+                        System.out.println("Error! Invalid option. Try again");
+                    }
                 }
                 
                 break;
             
             case "Student-Screen": 
-                // Kenna 
+                
                 break;
 
             case "Exit":
@@ -242,26 +253,48 @@ public class DemoProject {
                 int newEndtime = keyboard.nextInt();
                 keyboard.nextLine();
 
-                CSClass remove = new CSClass(newClassThreeLetterAbbreviation, newClassDigitNumber, newclassThreeLetterAbbreviation, newClassSize, newWaitListSize);
+                CSClass classToRemove = new CSClass(newClassThreeLetterAbbreviation, newClassDigitNumber, newclassThreeLetterAbbreviation, newClassSize, newWaitListSize);
+                classToRemove.setStartTime(newStartTime);
+                classToRemove.setEndTime(newEndtime);
 
-
-                schoolAdmin.removeClass();
+                schoolAdmin.removeClass(classToRemove);
                 break;
 
             case 5:
+                schoolAdmin.printOutFacultyList();
+
+                System.out.println("Enter faculty ID to see more detail about that faculty: ");
+                int enteredID = keyboard.nextInt();
+                keyboard.nextLine();
+
+                Faculty chosenFaculty = schoolAdmin.findFaculty(enteredID);
+
+                if(chosenFaculty != null)
+                {
+
+                    
+                }
+                else
+                {
+                    System.out.println("Couldn't find that faculty!");
+                }
                 
+
+
                 break;
 
             case 6:
-                
+                hiringFalculty(keyboard, true);
+              
                 break;
 
             case 7:
-                
+
                 break;
 
             case 8:
-                
+                hiringFalculty(keyboard, false);
+
                 break;
 
             case 9:
@@ -269,7 +302,8 @@ public class DemoProject {
                 break;
 
             case 10:
-                
+                userState = "System-Log-In";
+                System.out.println("logging out...");
                 break;
 
             case 11:
@@ -283,4 +317,84 @@ public class DemoProject {
         }
     }
 
+    private void hiringFalculty(Scanner keyboard, boolean isFullTime)
+    {
+        String[] facultyNames = facultyGenerator.getRandomNames();
+        System.out.println("Type the name of the faculty you want: ");
+        String enteredFaculty = keyboard.nextLine();
+
+        for (int i = 0; i < facultyNames.length; i++)
+        {
+            if (facultyNames[i].equals(enteredFaculty))
+            {
+                int enteredFacultyID = 0;
+                do 
+                {
+                    System.out.println("Give them an ID");
+                    enteredFacultyID = keyboard.nextInt();
+
+                    boolean checkFacultyID = schoolAdmin.checkFacultyID();
+                }
+                while(!checkFacultyID)
+
+
+                System.out.println("What is the username for faculty: ");
+                String newUsername = keyboard.nextLine();
+
+                System.out.println("What is the password for faculty: ");
+                String newPassword = keyboard.nextLine();
+
+
+                Faculty newFaculty = new Faculty(enteredFaculty, enteredFacultyID, newUsername, newPassword, isFullTime);
+                System.out.println(facultyNames[i] + "has been added to faculty list!");
+            }
+
+            
+
+            if(!facultyNames[facultyNames.length - 1].equals(enteredFaculty))
+            {
+                System.out.println("Couldn't find that faculty!");
+            }
+        }
+    }
+
+    private class facultyGenerator
+    {
+        String[] listOfNames = {
+            "John",
+            "David",
+            "Sarah",
+            "Michael",
+            "Emily",
+            "Daniel",
+            "Jessica",
+            "Andrew",
+            "Sophia",
+            "Benjamin",
+            "Emma",
+            "Christopher",
+            "Olivia",
+            "Matthew",
+            "Ava"
+        };
+
+        public facultyGenerator()
+        {
+
+        }
+        
+        // Ai :(
+        public String[] getRandomNames()
+        {
+            String[] randomNames = new String[3];
+            int randomID = (int)(Math.random() * listOfNames.length);
+            int randomID1 = (int)(Math.random() * listOfNames.length);
+            int randomID2 = (int)(Math.random() * listOfNames.length);
+            
+            randomNames[0] = listOfNames[randomID];
+            randomNames[1] = listOfNames[randomID1];
+            randomNames[2] = listOfNames[randomID2];
+            return randomNames;
+        }
+    }
 }
